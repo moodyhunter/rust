@@ -31,7 +31,7 @@ cfg_if::cfg_if! {
 }
 
 unsafe extern "C" {
-    #[cfg(not(any(target_os = "dragonfly", target_os = "vxworks", target_os = "rtems")))]
+    #[cfg(not(any(target_os = "dragonfly", target_os = "vxworks", target_os = "rtems", target_os = "mos")))]
     #[cfg_attr(
         any(
             target_os = "linux",
@@ -62,14 +62,14 @@ unsafe extern "C" {
 }
 
 /// Returns the platform-specific value of errno
-#[cfg(not(any(target_os = "dragonfly", target_os = "vxworks", target_os = "rtems")))]
+#[cfg(not(any(target_os = "dragonfly", target_os = "vxworks", target_os = "rtems", target_os = "mos")))]
 pub fn errno() -> i32 {
     unsafe { (*errno_location()) as i32 }
 }
 
 /// Sets the platform-specific value of errno
 // needed for readdir and syscall!
-#[cfg(all(not(target_os = "dragonfly"), not(target_os = "vxworks"), not(target_os = "rtems")))]
+#[cfg(all(not(target_os = "dragonfly"), not(target_os = "vxworks"), not(target_os = "rtems"), not(target_os = "mos")))]
 #[allow(dead_code)] // but not all target cfgs actually end up using it
 pub fn set_errno(e: i32) {
     unsafe { *errno_location() = e as c_int }
@@ -110,6 +110,29 @@ pub fn set_errno(e: i32) {
 
     unsafe {
         errno = e;
+    }
+}
+
+#[cfg(target_os = "mos")]
+pub fn errno() -> i32 {
+    extern "C" {
+        #[thread_local]
+        static __mlibc_errno: c_int;
+    }
+
+    unsafe { __mlibc_errno as i32 }
+}
+
+#[cfg(target_os = "mos")]
+#[allow(dead_code)]
+pub fn set_errno(e: i32) {
+    extern "C" {
+        #[thread_local]
+        static mut __mlibc_errno: c_int;
+    }
+
+    unsafe {
+        __mlibc_errno = e;
     }
 }
 
@@ -285,6 +308,11 @@ pub fn current_exe() -> io::Result<PathBuf> {
         }
     }
     Err(io::const_error!(ErrorKind::NotFound, "an executable path was not found"))
+}
+
+#[cfg(target_os = "mos")]
+pub fn current_exe() -> io::Result<PathBuf> {
+    unimplemented!()
 }
 
 #[cfg(any(target_os = "freebsd", target_os = "dragonfly"))]

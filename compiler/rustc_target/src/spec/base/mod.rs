@@ -18,6 +18,7 @@ pub(crate) mod linux_gnu;
 pub(crate) mod linux_musl;
 pub(crate) mod linux_ohos;
 pub(crate) mod linux_uclibc;
+pub(crate) mod mos;
 pub(crate) mod msvc;
 pub(crate) mod netbsd;
 pub(crate) mod nto_qnx;

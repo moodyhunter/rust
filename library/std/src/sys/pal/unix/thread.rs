@@ -137,7 +137,8 @@ impl Thread {
         target_os = "linux",
         target_os = "freebsd",
         target_os = "dragonfly",
-        target_os = "nuttx"
+        target_os = "nuttx",
+        target_os = "mos",
     ))]
     pub fn set_name(name: &CStr) {
         unsafe {

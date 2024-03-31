@@ -92,3 +92,8 @@ codegen-units = 1
 # FIXME: LTO cannot be enabled for binaries in a workspace
 # <https://github.com/rust-lang/cargo/issues/9330>
 # lto = true
+
+[patch.crates-io]
+# See comments in `library/rustc-std-workspace-core/README.md` for what's going on
+# here
+libc = { git = "https://github.com/moodyhunter/mos-rust-libc", branch = "main" }

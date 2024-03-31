@@ -153,6 +153,8 @@ pub mod ios;
 pub mod l4re;
 #[cfg(target_os = "macos")]
 pub mod macos;
+#[cfg(target_os = "mos")]
+pub mod mos;
 #[cfg(target_os = "netbsd")]
 pub mod netbsd;
 #[cfg(target_os = "nto")]

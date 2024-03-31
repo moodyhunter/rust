@@ -1982,9 +1982,8 @@ checksum = "baff4b617f7df3d896f97fe922b64817f6cd9a756bb81d40f8883f2f66dcb401"
 
 [[package]]
 name = "libc"
-version = "0.2.169"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b5aba8db14291edd000dfcc4d620c7ebfb122c613afb886ca8803fa4e128a20a"
+version = "0.2.170"
+source = "git+https://github.com/moodyhunter/mos-rust-libc?branch=main#62eb7b9ebdfb2f54ffdccda88c91f534beda8266"
 
 [[package]]
 name = "libdbus-sys"

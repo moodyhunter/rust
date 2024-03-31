@@ -85,6 +85,8 @@ const EXTRA_CHECK_CFGS: &[(Option<Mode>, &str, Option<&[&'static str]>)] = &[
     // Any library specific cfgs like `target_os`, `target_arch` should be put in
     // priority the `[lints.rust.unexpected_cfgs.check-cfg]` table
     // in the appropriate `library/{std,alloc,core}/Cargo.toml`
+    // #[cfg(bootstrap)] mos
+    (Some(Mode::Std), "target_os", Some(&["mos"])),
 ];
 
 /// A structure representing a Rust compiler.

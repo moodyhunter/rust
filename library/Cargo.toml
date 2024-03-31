@@ -1,15 +1,11 @@
 [workspace]
 resolver = "1"
-members = [
-  "std",
-  "sysroot",
-  "coretests",
-]
+members = ["std", "sysroot", "coretests"]
 
 exclude = [
   # stdarch has its own Cargo workspace
   "stdarch",
-  "windows_targets"
+  "windows_targets",
 ]
 
 [profile.release.package.compiler_builtins]
@@ -46,3 +42,4 @@ rustc-demangle.debug = 0
 rustc-std-workspace-core = { path = 'rustc-std-workspace-core' }
 rustc-std-workspace-alloc = { path = 'rustc-std-workspace-alloc' }
 rustc-std-workspace-std = { path = 'rustc-std-workspace-std' }
+libc = { git = "https://github.com/moodyhunter/mos-rust-libc", branch = "main" }

@@ -960,6 +960,7 @@ impl DirEntry {
         target_os = "android",
         target_os = "solaris",
         target_os = "illumos",
+        target_os = "mos",
         target_os = "haiku",
         target_os = "l4re",
         target_os = "fuchsia",

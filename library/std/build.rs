@@ -28,6 +28,7 @@ fn main() {
         || target_os == "freebsd"
         || target_os == "solaris"
         || target_os == "illumos"
+        || target_os == "mos"
         || target_os == "macos"
         || target_os == "ios"
         || target_os == "tvos"
